@@ -39,12 +39,14 @@ namespace Scriptrunner
                 case 0:
                     btnOpen.Enabled = true;
                     btnCopy.Enabled = false;
+                    btnRun.Enabled = false;
                     grid.EndEdit();
                     txtInput.Focus();
                     break;
                 case 1:
                     btnOpen.Enabled = false;
                     btnCopy.Enabled = false;
+                    btnRun.Enabled = false;
                     grid.EndEdit();
                     grid.Focus();
                     SetUpInputFields();
@@ -52,6 +54,7 @@ namespace Scriptrunner
                 case 2:
                     btnOpen.Enabled = false;
                     btnCopy.Enabled = true;
+                    btnRun.Enabled = true;
                     grid.EndEdit();
                     txtOutput.Focus();
                     ShowResult();
@@ -142,6 +145,11 @@ namespace Scriptrunner
         {
             Clipboard.SetText(txtOutput.Text);
             _messageShower.Tell(this, @"Output is copied to clipboard.", Text);
+        }
+
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
