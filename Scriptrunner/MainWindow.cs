@@ -89,12 +89,10 @@ namespace Scriptrunner
 
             var s = txtInput.Text;
 
-            var matches = Regex.Matches(txtInput.Text, RegexPattern);
+            foreach (var f in fieldsInInputTemplate)
+                s = s.Replace($@"`{f.Name}|{f.Datatype}´", f.Value);
 
-            foreach (Match match in matches)
-            {
-
-            }
+            txtOutput.Text = s;
         }
 
         private ParameterList GetExistingInputFieldsInGrid()
