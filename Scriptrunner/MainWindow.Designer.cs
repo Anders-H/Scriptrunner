@@ -72,6 +72,7 @@
             this.btnCopy.TabIndex = 1;
             this.btnCopy.Text = "Copy";
             this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
             // btnOpen
             // 
@@ -82,6 +83,7 @@
             this.btnOpen.TabIndex = 0;
             this.btnOpen.Text = "Open...";
             this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // panel2
             // 

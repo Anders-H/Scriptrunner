@@ -8,6 +8,7 @@ namespace Scriptrunner
     public partial class MainWindow : Form
     {
         private const string RegexPattern = @"`([A-Za-z0-9\s]+)\|([A-Za-z0-9\s]+)´";
+        private readonly IMessageShower _messageShower = new MessageShower();
 
         public MainWindow()
         {
@@ -128,8 +129,19 @@ namespace Scriptrunner
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing && MessageBox.Show(@"Exit Scriptrunner?", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) != DialogResult.Yes)
+            if (e.CloseReason == CloseReason.UserClosing && !_messageShower.Ask(this, @"Exit Scriptrunner?", Text))
                 e.Cancel = true;
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(txtOutput.Text);
+            _messageShower.Tell(this, @"Output is copied to clipboard.", Text);
         }
     }
 }

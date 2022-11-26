@@ -55,12 +55,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMessageShower.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="MessageShower.cs" />
     <Compile Include="Parameter.cs" />
     <Compile Include="ParameterList.cs" />
     <Compile Include="Program.cs" />
