@@ -6,5 +6,6 @@ namespace Scriptrunner
     {
         bool Ask(IWin32Window owner, string prompt, string title);
         void Tell(IWin32Window owner, string prompt, string title);
+        void Yell(IWin32Window owner, string prompt, string title);
     }
 }

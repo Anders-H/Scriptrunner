@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -9,10 +10,12 @@ namespace Scriptrunner
     {
         private const string RegexPattern = @"`([A-Za-z0-9\s]+)\|([A-Za-z0-9\s]+)´";
         private readonly IMessageShower _messageShower = new MessageShower();
+        private string _filename;
 
         public MainWindow()
         {
             InitializeComponent();
+            _filename = "";
         }
 
         private void MainWindow_Shown(object sender, EventArgs e)
@@ -138,7 +141,31 @@ namespace Scriptrunner
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
+            using (var x = new OpenFileDialog())
+            {
+                x.Filter = @"Supported script files|*.ps1;*.bat|PowerShell (*.ps1)|*.ps1|Batch (*.bat)|*.bat";
+                x.Title = @"Open script file";
 
+                if (x.ShowDialog(this) != DialogResult.OK)
+                    return;
+
+                Cursor = Cursors.WaitCursor;
+
+                try
+                {
+                    var t = File.ReadAllText(x.FileName);
+
+                    txtInput.Text = t;
+                    _filename = x.FileName;
+                }
+                catch (Exception exception)
+                {
+                    Cursor = Cursors.Default;
+                    _messageShower.Yell(this, $@"The file ""{x.FileName}"" could not be loaded.", exception.Message);
+                }
+
+                Cursor = Cursors.Default;
+            }
         }
 
         private void btnCopy_Click(object sender, EventArgs e)

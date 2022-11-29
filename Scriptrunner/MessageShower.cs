@@ -9,5 +9,8 @@ namespace Scriptrunner
 
         public void Tell(IWin32Window owner, string prompt, string title) =>
             MessageBox.Show(owner, prompt, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        public void Yell(IWin32Window owner, string prompt, string title) =>
+            MessageBox.Show(owner, prompt, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 }
